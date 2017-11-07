@@ -1,40 +1,60 @@
 #include "title.h"
 #include <Siv3D.hpp>
 
-typedef enum STATE{
-	titlemenu,
-	gamestart,
-	result,
-	config,
-	quit,
-	all
-}STATE;
-
 title::title(){
 	state_num = titlemenu;
+	//TextureAsset::Register(L"back", L"pic/title/back1.dds");
+	title::selectmenu[4] = {
+		{ { 30,180 },Texture(L"pic/title/element/gamestart.dds") },
+		{ { 30,240 },Texture(L"pic/title/element/result.dds") },
+		{ { 30,300 },Texture(L"pic/title/element/config.dds") },
+		{ { 30,360 },Texture(L"pic/title/element/quit.dds") }
+	};
 }
 
-int title::select(int &statenum, int itemnumber, int defaultitem) {
+
+
+void title::select(int &statenum, int itemnumber, int defaultitem) {
 	/* init */
-	struct element{
-		Point point;
-		Texture tex;
-	};
-	element selectmenu[4] = {
-		{ { 200,220 },Texture(L"pic/title/element/gamestart.dds") },
-		{ { 200,220 },Texture(L"pic/title/element/result.dds") },
-		{ { 200,220 },Texture(L"pic/title/element/config.dds") },
-		{ { 200,220 },Texture(L"pic/title/element/") }
-	};
+
+	int stnumber = defaultitem;
+
+
+	if (Input::KeyUp.pressed) {
+		stnumber = (stnumber - 1) % itemnumber;
+	}
+	if (Input::KeyDown.pressed) {
+		stnumber = (stnumber + 1) % itemnumber;
+	}
+
+	stnumber = statenum;
+
+	if (Input::KeyUp.pressed || Input::KeyDown.pressed) {
+		for (int i = 0; i < all - 1; ++i) {
+			if (i == statenum) {
+				title::selectmenu[i].title::element::point.x += 32;
+			}
+			if (i == statenum) {
+				title::selectmenu[i].title::element::point.x = 30;
+			}
+		}
+	}
+
+	for (int i = 0; i < all - 1; ++i) {
+		title::selectmenu[i].tex.draw(title::selectmenu[i].title::element::point);
+	}
 }
 
-void title::menu(STATE state_ = titlemenu) {
-	int *selectnum;
-	select(*selectnum, all,state_num);
+void title::menu(STATE state_=titlemenu) {
+	int a = 1;
+	int *selectnum=&a;
+	Texture back (L"pic/title/back1.dds");
 
 	switch (state_) {
 	case titlemenu:
 		state_num = titlemenu;
+		back.draw(0,0);
+		select(*selectnum, all, state_num);
 		if (Input::KeyZ.pressed) {
 			switch (*selectnum) {
 			case gamestart:
