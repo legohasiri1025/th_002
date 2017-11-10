@@ -3,14 +3,14 @@
 #include <Siv3D.hpp>
 #include <HamFramework.hpp>
 
-void title::init() {
+void result::init() {
 
 }
 
-void title::update() {
+void result::update() {
 
 }
 
-void title::draw() const{
+void result::draw() const {
 
 }

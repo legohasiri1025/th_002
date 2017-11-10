@@ -163,7 +163,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="gamestartcpp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +284,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
+    <ClInclude Include="Asset.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="mapchip.h" />
     <ClInclude Include="title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
